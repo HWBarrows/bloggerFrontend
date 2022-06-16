@@ -50,6 +50,7 @@ export default function LandingPage() {
   }
 
   //The following line is used for the useEffect array of dependencies
+  // eslint-disable-next-line
   const [effected, setEffected] = useState('');
 
   //The following line is the array of objects that is used for the sidebar
@@ -220,6 +221,22 @@ export default function LandingPage() {
           </li>
         ))}
         <NavLink to="/createNew"> Click to Create a new blog post </NavLink>
+        <div className="aboutSection">
+          <div
+            style={{
+              backgroundImage:
+                'url(https://profile-images.xing.com/images/f6130672bb55af87d2035620307f2b3d-2/hallie-barrows.1024x1024.jpg)'
+            }}
+            id="aboutImage"></div>
+
+          <h3>About</h3>
+          <p>
+            <p>
+              A small fullstack project using React, Typescript, MongoDB with Express & Express
+              Validator, created by Hallie Barrows
+            </p>
+          </p>
+        </div>
       </div>
     </div>
   );
