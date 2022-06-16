@@ -31,7 +31,7 @@ export default function LandingPage() {
         [parameter1]: parameter2
       })
     };
-    fetch(`http://localhost:4000/articles/${mainDoc._id}`, config)
+    fetch(`https://code-challenge-back.herokuapp.com//articles/${mainDoc._id}`, config)
       .then((response) => response.json())
       .then((response) => {
         if (response._id) {
@@ -92,7 +92,7 @@ export default function LandingPage() {
   });
 
   useEffect(() => {
-    fetch('http://localhost:4000/articles')
+    fetch('https://code-challenge-back.herokuapp.com/articles')
       .then((response) => response.json())
       .then((response) => {
         setResults(response);
@@ -104,14 +104,16 @@ export default function LandingPage() {
   function getNewDoc(e: MouseEvent<HTMLLIElement>) {
     const target = e.target as Element;
 
-    fetch(`http://localhost:4000/articles/${target.id}`)
+    fetch(`https://code-challenge-back.herokuapp.com/articles/${target.id}`)
       .then((response) => response.json())
       .then((response) => setMainDoc(response));
   }
 
   //This function deletes the selected article from the API
   function deleteArticle() {
-    fetch(`http://localhost:4000/articles/${mainDoc._id}`, { method: 'DELETE' })
+    fetch(`https://code-challenge-back.herokuapp.com//articles/${mainDoc._id}`, {
+      method: 'DELETE'
+    })
       .then((response) => response.json())
       .then((response) => console.log(response));
     const deletedArray = results.filter((item) => item._id !== mainDoc._id);
@@ -231,10 +233,8 @@ export default function LandingPage() {
 
           <h3>About</h3>
           <p>
-            <p>
-              A small fullstack project using React, Typescript, MongoDB with Express & Express
-              Validator, created by Hallie Barrows
-            </p>
+            A small fullstack project using React, Typescript, MongoDB with Express & Express
+            Validator, created by Hallie Barrows
           </p>
         </div>
       </div>

@@ -59,13 +59,13 @@ export default function CreateNew() {
   };
 
   function sendForm() {
-    fetch('http://localhost:4000/articles', config)
+    fetch('https://code-challenge-back.herokuapp.com/articles', config)
       .then((response) => response.json())
       .then((response) => {
-        if (response.newArticle.author) {
-          alert(`Thank you for your submission`);
+        if (response.error) {
+          alert(response.error);
         } else {
-          alert(`Message could not be sent. Please check your info and try again`);
+          alert(`Thank you for your submission`);
         }
       });
   }
