@@ -1,0 +1,41 @@
+.formWrapper {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p{
+        text-align: center;
+    }
+
+    span{
+        font-style: italic;
+    }
+
+    form {
+        width: 85vw;
+        box-sizing: border-box;
+
+        label {
+            font-size: 1.5em;
+        }
+
+        input {
+            width: 100%;
+            height: 2em;
+            margin-top: .5em;
+            margin-bottom: 1em;
+            outline-style: none;
+            padding: .5em;
+        }
+
+        textarea{
+            width: 100%;
+            padding: .5em;
+            margin-top: .5em;
+        }
+    }
+
+    
+}

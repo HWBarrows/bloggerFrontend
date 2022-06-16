@@ -1,0 +1,22 @@
+.landingWrapper {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    box-sizing: border-box;
+}
+
+.sidebar {
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+.pagePhoto{
+    height:40vh;
+    width: 60vw;
+    background-position: center;
+    background-size: cover;
+}
+
+.pageWrapper {
+    width:70vw;
+}

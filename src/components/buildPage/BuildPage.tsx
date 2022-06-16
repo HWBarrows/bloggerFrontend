@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './BuildPage.scss';
 
 interface pageProps {
@@ -18,14 +19,19 @@ export default function BuildPage({ author, content, heading, photoUrl, topic }:
   } else {
     return (
       <div className="pageWrapper">
-        <div style={{ backgroundImage: `url(${photoUrl})` }} className="pagePhoto"></div>
-        <h1>{heading}</h1>
-        <h5>Written by: {author}</h5>
-        <p>topic: {topic}</p>
+        <div className="headingWithPhoto">
+          <div
+            id="photoUrl"
+            className="pagePhoto"
+            style={{ backgroundImage: `url(${photoUrl})` }}></div>
+          <h1 id="heading">{heading}</h1>
+        </div>
+        <h5 id="author">Written by: {author}</h5>
+        <p id="topic">topic: {topic}</p>
         {content.map((item, index) => (
-          // eslint-disable-next-line react/jsx-key
-          <p key={index + 'topic'}>{item}</p>
+          <p key={index + topic}>{item}</p>
         ))}
+        <button>Click to edit this article</button>
       </div>
     );
   }
