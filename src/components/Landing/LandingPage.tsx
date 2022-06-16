@@ -33,10 +33,14 @@ export default function LandingPage() {
     };
     fetch(`http://localhost:4000/articles/${mainDoc._id}`, config)
       .then((response) => response.json())
-      .then((response) => console.log(response));
-    setEffected('changed' + parameter2);
+      .then((response) => {
+        if (response._id) {
+          setMainDoc(response);
+        }
+      });
   }
 
+  //This function clears the input field
   function clear(
     e: MouseEvent<HTMLElement>,
     selectedState: React.Dispatch<React.SetStateAction<string>>
@@ -48,7 +52,7 @@ export default function LandingPage() {
   //The following line is used for the useEffect array of dependencies
   const [effected, setEffected] = useState('');
 
-  //Line 10 is the array of objects that is used for the sidebar
+  //The following line is the array of objects that is used for the sidebar
   const [results, setResults] = useState<
     {
       author: string;
@@ -104,12 +108,42 @@ export default function LandingPage() {
       .then((response) => setMainDoc(response));
   }
 
-  const sidebar = results.filter((item) => item.heading !== mainDoc.heading);
+  //This function deletes the selected article from the API
+  function deleteArticle() {
+    fetch(`http://localhost:4000/articles/${mainDoc._id}`, { method: 'DELETE' })
+      .then((response) => response.json())
+      .then((response) => console.log(response));
+    const deletedArray = results.filter((item) => item._id !== mainDoc._id);
+    setResults([...deletedArray]);
+    setMainDoc(deletedArray[0]);
+  }
 
+  if (results.length < 1) {
+    return (
+      <div>
+        <h1>Sorry, no articles found</h1>
+        <NavLink to="/createNew"> Click to Create a new blog post </NavLink>
+      </div>
+    );
+  }
   return (
     <div className="landingWrapper">
       <div className="pageWrapper">
         <div className="headingWithPhoto">
+          <h1 id="heading">{mainDoc.heading}</h1>
+
+          {showEdit && (
+            <form>
+              <input
+                type="text"
+                placeholder="heading"
+                value={editHeading}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setEditHeading(e.target.value)}
+              />
+              <button onClick={(e) => sendEdits(e, 'heading', editHeading)}>Save edits</button>
+              <button onClick={(e) => clear(e, setEditHeading)}>Clear</button>
+            </form>
+          )}
           <div
             id="photoUrl"
             className="pagePhoto"
@@ -124,19 +158,6 @@ export default function LandingPage() {
               />
               <button onClick={(e) => sendEdits(e, 'photoUrl', editPhoto)}>Save edits</button>
               <button onClick={(e) => clear(e, setEditPhoto)}>Clear</button>
-            </form>
-          )}
-          <h1 id="heading">{mainDoc.heading}</h1>
-          {showEdit && (
-            <form>
-              <input
-                type="text"
-                placeholder="heading"
-                value={editHeading}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setEditHeading(e.target.value)}
-              />
-              <button onClick={(e) => sendEdits(e, 'heading', editHeading)}>Save edits</button>
-              <button onClick={(e) => clear(e, setEditHeading)}>Clear</button>
             </form>
           )}
         </div>
@@ -184,12 +205,16 @@ export default function LandingPage() {
             <button onClick={(e) => clear(e, setEditContent)}>Clear</button>
           </form>
         )}
+
         <button onClick={() => setShowEdit(!showEdit)}>
           {showEdit ? 'Close edit dialog' : 'Click to edit this article'}
         </button>
+        <button id="deleteArticle" onClick={() => deleteArticle()}>
+          DELETE
+        </button>
       </div>
       <div className="sidebar">
-        {sidebar.map((item, index) => (
+        {results.map((item, index) => (
           <li key={index + 'sidebar'} id={item._id} onClick={(e) => getNewDoc(e)}>
             {item.heading}
           </li>

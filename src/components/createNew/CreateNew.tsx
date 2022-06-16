@@ -62,8 +62,8 @@ export default function CreateNew() {
     fetch('http://localhost:4000/articles', config)
       .then((response) => response.json())
       .then((response) => {
-        if (response.author) {
-          alert(`Thank you ${response.author} for your message`);
+        if (response.newArticle.author) {
+          alert(`Thank you for your submission`);
         } else {
           alert(`Message could not be sent. Please check your info and try again`);
         }
@@ -112,7 +112,7 @@ export default function CreateNew() {
           <input
             type="text"
             name="topic"
-            placeholder="beauty, health, food and drink, travel, or fashion"
+            placeholder="beauty, health, food and drink, travel, fashion, or finance"
             value={formState.topic}
             onChange={(e) => getText(e)}
           />
