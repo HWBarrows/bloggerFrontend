@@ -111,7 +111,7 @@ export default function LandingPage() {
 
   //This function deletes the selected article from the API
   function deleteArticle() {
-    fetch(`https://code-challenge-back.herokuapp.com//articles/${mainDoc._id}`, {
+    fetch(`https://code-challenge-back.herokuapp.com/articles/${mainDoc._id}`, {
       method: 'DELETE'
     })
       .then((response) => response.json())
