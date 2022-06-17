@@ -31,7 +31,7 @@ export default function LandingPage() {
         [parameter1]: parameter2
       })
     };
-    fetch(`https://code-challenge-back.herokuapp.com//articles/${mainDoc._id}`, config)
+    fetch(`https://code-challenge-back.herokuapp.com/articles/${mainDoc._id}`, config)
       .then((response) => response.json())
       .then((response) => {
         if (response._id) {
