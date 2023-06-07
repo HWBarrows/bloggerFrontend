@@ -5,6 +5,6 @@
   
 
 
-the live app: https://blogger-barrows.herokuapp.com/
+
 
 Git repository for the backend: https://github.com/HWBarrows/bloggerBackend
